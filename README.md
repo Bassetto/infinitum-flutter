@@ -1,6 +1,6 @@
 # Infinitum APP
 
-Projeto de consulta de municípios para o TEC SP
+Projeto de consulta de municípios para o TCE SP
 
 ## Integrantes
 
