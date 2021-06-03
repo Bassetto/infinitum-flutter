@@ -4,7 +4,6 @@ import 'package:infinitum/app/components/despesa_municipio_card_widget.dart';
 import 'package:infinitum/app/components/loading_widget.dart';
 import 'package:infinitum/app/model/municipio_despesa_model.dart';
 import 'package:infinitum/app/model/municipio_model.dart';
-import 'package:infinitum/app/model/municipio_receita_model.dart';
 import 'package:infinitum/app/service/municipio_service_api.dart';
 
 class MunicipioDespesas extends StatefulWidget {
@@ -17,7 +16,6 @@ class MunicipioDespesas extends StatefulWidget {
 class _MunicipioDespesasState extends State<MunicipioDespesas> {
   final MunicipioServiceApi _api = MunicipioServiceApi();
   MunicipioModel _municipio;
-  List<MunicipioDespesaModel> _municipioDespesa = [];
   TextEditingController _anoController;
   TextEditingController _mesController;
   int _ano = DateTime.now().year;
@@ -25,10 +23,8 @@ class _MunicipioDespesasState extends State<MunicipioDespesas> {
 
   @override
   initState() {
-    _anoController = TextEditingController.fromValue(
-        TextEditingValue(text: _ano.toString()));
-    _mesController = TextEditingController.fromValue(
-        TextEditingValue(text: _mes.toString()));
+    _anoController = TextEditingController();
+    _mesController = TextEditingController();
     super.initState();
   }
 
@@ -44,6 +40,7 @@ class _MunicipioDespesasState extends State<MunicipioDespesas> {
     if (mes >= 1 && mes <= 12) {
       setState(() {
         _mes = mes;
+        _mesController.clear();
       });
       FocusScope.of(context).unfocus();
     }
@@ -54,6 +51,7 @@ class _MunicipioDespesasState extends State<MunicipioDespesas> {
     if (ano >= 2014 && ano <= DateTime.now().year) {
       setState(() {
         _ano = ano;
+        _anoController.clear();
       });
       FocusScope.of(context).unfocus();
     }

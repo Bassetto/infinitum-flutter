@@ -18,16 +18,13 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
   MunicipioModel _municipio;
   TextEditingController _anoController;
   TextEditingController _mesController;
-  List<MunicipioReceitaModel> _municipioReceita = [];
   int _ano = DateTime.now().year;
   int _mes = DateTime.now().month;
 
   @override
   initState() {
-    _anoController = TextEditingController.fromValue(
-        TextEditingValue(text: _ano.toString()));
-    _mesController = TextEditingController.fromValue(
-        TextEditingValue(text: _mes.toString()));
+    _anoController = TextEditingController();
+    _mesController = TextEditingController();
     super.initState();
   }
 
@@ -43,6 +40,7 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
     if (mes >= 1 && mes <= 12) {
       setState(() {
         _mes = mes;
+        _mesController.clear();
       });
       FocusScope.of(context).unfocus();
     }
@@ -53,6 +51,7 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
     if (ano >= 2014 && ano <= DateTime.now().year) {
       setState(() {
         _ano = ano;
+        _anoController.clear();
       });
       FocusScope.of(context).unfocus();
     }
@@ -66,57 +65,59 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
       appBar: AppBar(
         title: Text("Receitas ${_municipio.nome}"),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: TextField(
-                      decoration:
-                          InputDecoration(labelText: "Digite o mês desejado"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(2),
-                      ],
-                      controller: _mesController,
-                      onEditingComplete: _updateMes,
-                    )),
-              ),
-              Expanded(
-                child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: TextField(
-                      decoration:
-                          InputDecoration(labelText: "Digite o ano desejado"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(4),
-
-                      ],
-                      controller: _anoController,
-                      onEditingComplete: _updateAno,
-                    )),
-              ),
-            ],
-          ),
-          Expanded(
-            child: FutureBuilder<List<MunicipioReceitaModel>>(
-                future:
-                    _api.getReceitasMunicipio(_municipio.nomeURI, _ano, _mes),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return listViewBuilder(snapshot.data);
-                  } else {
-                    return LoadingWidget();
-                  }
-                }),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Digite o mês desejado",
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
+                    controller: _mesController,
+                    onEditingComplete: _updateMes,
+                  ),
+                ),
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Digite o ano desejado",
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(4),
+                    ],
+                    controller: _anoController,
+                    onEditingComplete: _updateAno,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: FutureBuilder<List<MunicipioReceitaModel>>(
+                  future:
+                      _api.getReceitasMunicipio(_municipio.nomeURI, _ano, _mes),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return listViewBuilder(snapshot.data);
+                    } else {
+                      return LoadingWidget();
+                    }
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }

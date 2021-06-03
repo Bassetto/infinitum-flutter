@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinitum/app/core/app_text_styles.dart';
 import 'package:infinitum/app/model/municipio_despesa_model.dart';
-import 'package:infinitum/app/model/municipio_receita_model.dart';
 
 class MunicipioDespesaDetalhes extends StatelessWidget {
   const MunicipioDespesaDetalhes({Key key}) : super(key: key);
@@ -10,7 +9,6 @@ class MunicipioDespesaDetalhes extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final MunicipioDespesaModel despesaMunicipio = ModalRoute.of(context).settings.arguments;
-    double phoneWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(),

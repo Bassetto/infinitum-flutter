@@ -9,7 +9,6 @@ class MunicipioReceitaDetalhes extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final MunicipioReceitaModel receitaMunicipio = ModalRoute.of(context).settings.arguments;
-    double phoneWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(),

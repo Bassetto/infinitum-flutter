@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infinitum/app/model/municipio_despesa_model.dart';
-import 'package:infinitum/app/model/municipio_receita_model.dart';
 
 class DespesaMunicipioCard extends StatelessWidget {
   const DespesaMunicipioCard({Key key, this.despesaMunicipio}) : super(key: key);
@@ -32,7 +31,7 @@ class DespesaMunicipioCard extends StatelessWidget {
                     width: phoneWidth * 0.65,
                     child: ListTile(
                       subtitle: Text(despesaMunicipio.nmFornecedor),
-                      title: Text("R\$${despesaMunicipio.vlDespesa}"),
+                      title: Text("R\$${despesaMunicipio.vlDespesa}\n${despesaMunicipio.mes}"),
                       trailing: Icon(Icons.add),
                     ),
                   ),

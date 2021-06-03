@@ -28,11 +28,10 @@ class ReceitaMunicipioCard extends StatelessWidget {
                       softWrap: true,
                     ),
                   ),
-                  Container(
-                    width: phoneWidth * 0.65,
+                  Expanded(
                     child: ListTile(
                       subtitle: Text(receitaMunicipio.dsAlinea),
-                      title: Text("R\$${receitaMunicipio.vlArrecadacao}"),
+                      title: Text("R\$${receitaMunicipio.vlArrecadacao}\n${receitaMunicipio.mes}"),
                       trailing: Icon(Icons.add),
                     ),
                   ),
