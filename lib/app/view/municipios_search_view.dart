@@ -16,8 +16,8 @@ class _PesquisaMunicipiosState extends State<PesquisaMunicipios> {
   final MunicipioServiceApi _api = MunicipioServiceApi();
 
   _removerAcentos(String nome) {
-    String comAcentos = "ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç";
-    String semAcentos = "AAAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUuuuuCc";
+    String comAcentos = "äáâàãéêëèíîïìöóôòõüúûùç";
+    String semAcentos = "aaaaaeeeeiiiiooooouuuuc";
 
     for (int i = 0; i < comAcentos.length; i++) {
       nome = nome.replaceAll(comAcentos[i], semAcentos[i]);
