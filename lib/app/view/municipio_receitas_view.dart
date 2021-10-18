@@ -40,8 +40,8 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
     if (mes >= 1 && mes <= 12) {
       setState(() {
         _mes = mes;
-        _mesController.clear();
       });
+      _mesController.clear();
       FocusScope.of(context).unfocus();
     }
   }
@@ -51,8 +51,8 @@ class _MunicipioReceitasState extends State<MunicipioReceitas> {
     if (ano >= 2014 && ano <= DateTime.now().year) {
       setState(() {
         _ano = ano;
-        _anoController.clear();
       });
+      _anoController.clear();
       FocusScope.of(context).unfocus();
     }
   }
